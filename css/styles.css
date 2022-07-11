@@ -1,0 +1,12 @@
+#cards {
+    max-width: 30em;
+}
+
+header {
+    background-color: rgb(73, 78, 114);
+}
+
+footer {
+    height: 5em;
+    background-color: bisque;
+}
