@@ -49,7 +49,7 @@ for (let i = 0; i < productos.length; i++) {
                     <div class="card-body">
                         <h5 class="card-title">${productos[i].title}</h5>
                         <p class="card-text">${productos[i].description}</p>
-                        <p class="card-text"><small class="text-muted"><id="price">US$${productos[i].price}</p>
+                        <p class="card-text" id="price${i}"><small class="text-muted">${productos[i].price}</p>
                         <button type="button" class="btn-sm btn-success">Comprar</button>
                     </div>
                 </div>
@@ -58,23 +58,24 @@ for (let i = 0; i < productos.length; i++) {
     `
 }
 
-/* const calcularPesos = () => {
-    let montoDolar = document.getElementById ("montoDolar").value;
+const calculate = () => {
+    let valueDolar = document.getElementById ("valueDolar").value;
     let total = document.getElementById ("total");
 
-    let valorPesosUy = 42;
-    let iva = +montoDolar * (24/100)   
-    let impCompraPesos = +montoDolar * (5 / 100);
+    let valuePeso = 42;
+    let iva = +valueDolar * (24/100);   
+    let impPeso = +valueDolar * (5 / 100);
 
-    montoDolar = valorPesosUy * +montoDolar + iva + impCompraPesos
+    valueDolar = valuePeso * +valueDolar + iva + impPeso
 
     total.innerHTML = `
-        <h3>Tienes que pagar UY$${montoDolar} pesos Uruguayos</h3>
+        <h3>Tienes que pagar UY$${valueDolar} pesos Uruguayos</h3>
         `
-} */
+}
 
-const calcular = () => {
-    let price = document.getElementById("price").value;
+/* const calculate = () => {
+    let price = document.getElementById("price1").value;
+    console.log(price);
     let total = document.getElementById("total")
 
     let valorPesosUy = 42;
@@ -85,4 +86,4 @@ const calcular = () => {
     total.innerHTML = `
         <h5>La compra te saldrá ${price} pesos uruguayos.</h5>
     `
-}
+} */
