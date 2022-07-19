@@ -64,8 +64,19 @@
         <div class="container">
             <div id="cards" class="row"></div>
             <div>
-                <h3>Ingresa cuantos dólares salió tu compra y te diremos cuantos UY$ debes abonar.</h3>
-                <input type="text" id="valueDolar"></input>
+                <h4>Para ordenar los productos por orden:</h4>
+                <h5>-Alfabético de la A a la Z presione 1</h5>
+                <h5>-Alfabético de la Z a A presione 2</h5>
+                <h5>-Por menor a mayor precio presione 3</h5>
+                <h5>-Por mayor a menor precio presione 4</h5>
+                <input id="order" type="number"></input>
+                <button id="show"> Mostrar</button>
+                <div id="newOrder" class="row"></div>
+
+            </div>
+            <div>
+                <h4>Ingresa cuantos dólares salió tu compra y te diremos cuantos UY$ debes abonar.</h4>
+                <input id="valueDolar" type="text"></input>
                 <button onclick="calculate ()"></button>
                 <div id="total"></div>
             </div>
@@ -73,7 +84,7 @@
     </main>
     <!-- Footer -->
     <footer>
-    <h3>(footer)</h3>
+        <h3>(footer)</h3>
     </footer>
 </body>
 

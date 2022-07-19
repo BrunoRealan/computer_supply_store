@@ -36,7 +36,7 @@ let productos = [{
 },
 ]
 
-let cards = document.getElementById("cards")
+let cards = document.getElementById("cards");
 
 for (let i = 0; i < productos.length; i++) {
     cards.innerHTML += `
@@ -58,12 +58,66 @@ for (let i = 0; i < productos.length; i++) {
     `
 }
 
+document.getElementById("show").addEventListener("click", function organize() {
+    var order = parseInt(document.getElementById("order").value);
+    let newOrder = document.getElementById("newOrder");
+    let newArray = [...productos];
+
+    switch (order) {
+
+        case 1:
+            let aToZName = newArray.sort((a, b) => a.title.localeCompare(b.title));
+            return aToZName;
+
+        case 2:
+            let zToAName = newArray.sort((a, b) => b.title.localeCompare(a.title));
+            return zToAName;
+
+        case 3:
+            let minorToMayor = newArray.sort((a, b) => a.price - b.price);
+            return minorToMayor;
+
+        case 4:
+            let mayorToMinor = newArray.sort((a, b) => b.price - a.price);
+            return mayorToMinor;
+
+        default:
+            alert("No se puede ordernar, no elegiste un criterio válido")
+            break;
+    }
+
+    if (order != defarult) {
+        for (let i = 0; i < newArray.length; i++) {
+            newOrder.innerHTML += `
+        <div class="card m-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src=${newArray[i].img} class="img-fluid rounded-start" alt="Monitor gamer.">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title">${newArray[i].title}</h5>
+                        <p class="card-text">${newArray[i].description}</p>
+                        <p class="card-text" id="price${i}"><small class="text-muted">${newArray[i].price}</p>
+                        <button type="button" class="btn-sm btn-success">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+        }
+    }
+}
+)
+
+
+
 const calculate = () => {
-    let valueDolar = document.getElementById ("valueDolar").value;
-    let total = document.getElementById ("total");
+    let valueDolar = document.getElementById("valueDolar").value;
+    let total = document.getElementById("total");
 
     let valuePeso = 42;
-    let iva = +valueDolar * (24/100);   
+    let iva = +valueDolar * (24 / 100);
     let impPeso = +valueDolar * (5 / 100);
 
     valueDolar = valuePeso * +valueDolar + iva + impPeso
@@ -72,18 +126,3 @@ const calculate = () => {
         <h3>Tienes que pagar UY$${valueDolar} pesos Uruguayos</h3>
         `
 }
-
-/* const calculate = () => {
-    let price = document.getElementById("price1").value;
-    console.log(price);
-    let total = document.getElementById("total")
-
-    let valorPesosUy = 42;
-    let impCompraPesos = +price * (5 / 100);
-
-    price = valorPesosUy * +price + impCompraPesos
-
-    total.innerHTML = `
-        <h5>La compra te saldrá ${price} pesos uruguayos.</h5>
-    `
-} */
