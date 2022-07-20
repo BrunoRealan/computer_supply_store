@@ -66,27 +66,27 @@ document.getElementById("show").addEventListener("click", function organize() {
     switch (order) {
 
         case 1:
-            let aToZName = newArray.sort((a, b) => a.title.localeCompare(b.title));
-            return aToZName;
+            newArray = newArray.sort((a, b) => a.title.localeCompare(b.title));
+            break
 
         case 2:
-            let zToAName = newArray.sort((a, b) => b.title.localeCompare(a.title));
-            return zToAName;
+            newArray = newArray.sort((a, b) => b.title.localeCompare(a.title));
+            break;
 
         case 3:
-            let minorToMayor = newArray.sort((a, b) => a.price - b.price);
-            return minorToMayor;
+            newArray = newArray.sort((a, b) => a.price - b.price);
+            break;
 
         case 4:
-            let mayorToMinor = newArray.sort((a, b) => b.price - a.price);
-            return mayorToMinor;
+            newArray = newArray.sort((a, b) => b.price - a.price);
+            break;
 
         default:
             alert("No se puede ordernar, no elegiste un criterio válido")
             break;
     }
 
-    if (order != defarult) {
+    if (1,2,3,4) {
         for (let i = 0; i < newArray.length; i++) {
             newOrder.innerHTML += `
         <div class="card m-3">
@@ -106,7 +106,7 @@ document.getElementById("show").addEventListener("click", function organize() {
         </div>
         `
         }
-    }
+    }else {}
 }
 )
 
