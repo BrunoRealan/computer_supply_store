@@ -86,7 +86,7 @@ document.getElementById("show").addEventListener("click", function organize() {
             break;
     }
 
-    if (1,2,3,4) {
+    if (order = 1 || 2 || 3 || 4) {
         for (let i = 0; i < newArray.length; i++) {
             newOrder.innerHTML += `
         <div class="card m-3">
@@ -106,7 +106,10 @@ document.getElementById("show").addEventListener("click", function organize() {
         </div>
         `
         }
-    }else {}
+    }else {
+        newOrder.innerHTML = `
+        <h3>"No se puede ordernar, no elegiste un criterio válido"</h3>`
+    }
 }
 )
 
