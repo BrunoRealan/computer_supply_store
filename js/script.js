@@ -38,25 +38,23 @@ let productos = [{
 
 let cards = document.getElementById("cards");
 
-for (let i = 0; i < productos.length; i++) {
-    cards.innerHTML += `
-        <div class="card m-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src=${productos[i].img} class="img-fluid rounded-start" alt="Monitor gamer.">
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <h5 class="card-title">${productos[i].title}</h5>
-                        <p class="card-text">${productos[i].description}</p>
-                        <p class="card-text" id="price${i}"><small class="text-muted">${productos[i].price}</p>
-                        <button type="button" class="btn-sm btn-success">Comprar</button>
-                    </div>
-                </div>
+productos.forEach((elem)=> {cards.innerHTML += `
+<div class="card m-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src=${elem.img} class="img-fluid rounded-start" alt="Monitor gamer.">
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">${elem.title}</h5>
+                <p class="card-text">${elem.description}</p>
+                <p class="card-text" id=""><small class="text-muted">${elem.price}</p>
+                <button type="button" class="btn-sm btn-success">Comprar</button>
             </div>
         </div>
-    `
-}
+    </div>
+</div>`})
+
 
 document.getElementById("show").addEventListener("click", function organize() {
     var order = parseInt(document.getElementById("order").value);
@@ -106,14 +104,12 @@ document.getElementById("show").addEventListener("click", function organize() {
         </div>
         `
         }
-    }else {
+    } else {
         newOrder.innerHTML = `
         <h3>"No se puede ordernar, no elegiste un criterio válido"</h3>`
     }
 }
 )
-
-
 
 const calculate = () => {
     let valueDolar = document.getElementById("valueDolar").value;
