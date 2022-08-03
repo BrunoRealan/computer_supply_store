@@ -147,7 +147,7 @@ function showProducts(array) {
             <div class="col">
                 <div class="card">
                     <i class="bi bi-heart"></i>
-                    <img src=${product.img} class="card-img-top"
+                    <img src=${product.img} class="card-img-top p-4"
                         alt=${product.name}>
                     <div class="card-body text-center">
                         <h5 class="card-name">${product.name}</h5>
@@ -216,7 +216,7 @@ function renderCart() {
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src=${product.img} class="img-fluid rounded-start" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
+                    <img src=${product.img} class="img-fluid rounded-start p-2" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -277,13 +277,15 @@ function changeNumberOfUnits(action, id) {
         updateCart();
 }
 
-//Función del Boton Comprar (Da error, lógica incorrecta?)
+//Función del Boton Comprar (Da error, lógica incorrecta? el problema es al parcear JSON en let cart?)
 
 function buyCart(array) {
-    if (!array.length) {
+    if (!array.lenght) {
         alert("¡No hay productos para comprar!")
     } else {
         alert("Compra satisfactoria");
+        //Clear Cart
+        //updateCart()
     }
 }
 
