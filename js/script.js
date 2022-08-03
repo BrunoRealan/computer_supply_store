@@ -127,32 +127,33 @@ let products = [{
     stock: 2,
     price: 774.99,
 }];
-let newArray = [];
-
-let cartHtml = document.getElementById("cartHtml");
-let btnPlus = document.getElementsByClassName("btnMinus");
-let btnMinus = document.getElementsByClassName("btnPlus");
-let canvasSubtitle = document.getElementById("canvasSubtitle");
+//Arrays vacios de utilidad
+let newArray = [],
+    cart = [];
+//Variables de elementos del DOM
+let cartHtml = document.getElementById("cartHtml"),
+    btnPlus = document.getElementsByClassName("btnMinus"),
+    btnMinus = document.getElementsByClassName("btnPlus"),
+    canvasSubtitle = document.getElementById("canvasSubtitle");
 
 
 
 //Funcion para renderizar productos
 function showProducts(array) {
-
     let products = "";
-    array.forEach((item) => {
+    array.forEach((product) => {
         products += `
             <div class="col">
                 <div class="card">
                     <i class="bi bi-heart"></i>
-                    <img src=${item.img} class="card-img-top"
-                        alt=${item.name}>
+                    <img src=${product.img} class="card-img-top"
+                        alt=${product.name}>
                     <div class="card-body text-center">
-                        <h5 class="card-name">${item.name}</h5>
-                        <h6 class="card-text">${item.description}</h6>
-                        <h5 class="card-text text-danger">US$ ${item.price}</h5>
-                        <p class="card-text"><small class="text-muted">En Stock: ${item.stock}</small></p>
-                        <button type="button" class="btn btn-outline-primary" onclick="addToCart(${item.id})">Agregar al Carrito</button>
+                        <h5 class="card-name">${product.name}</h5>
+                        <h6 class="card-text">${product.description}</h6>
+                        <h5 class="card-text text-danger">US$ ${product.price}</h5>
+                        <p class="card-text"><small class="text-muted">En Stock: ${product.stock}</small></p>
+                        <button type="button" class="btn btn-outline-primary" onclick="addToCart(${product.id})">Agregar al Carrito</button>
                     </div>
                 </div>
             </div>`,
@@ -184,59 +185,45 @@ function forMayorTo(array) {
 
 
 //Función que suma productos al carrito
-let cart = [];
 function addToCart(id) {
     cartHtml.innerHTML = "";
-    if (cart.some((item) => item.id === id)) {
+    if (cart.some((product) => product.id === id)) {
         changeNumberOfUnits("plus", id);
     } else {
-        const item = products.find((item) => item.id === id)
+        const product = products.find((product) => product.id === id)
         cart.push({
-            ...item,
+            ...product,
             numberOfUnits: 1,
         });
     }
     updateCart();
 }
 
-
+//Función que actualiza el carrito
 function updateCart() {
     renderCart();
     renderTotal();
 }
 
-function renderTotal() {
-    let totalPrice = 0;
-    let totalItems = 0;
-
-    cart.forEach((item) => {
-        totalPrice += item.price * item.numberOfUnits;
-        totalItems += item.numberOfUnits;
-    });
-    canvasSubtitle.innerHTML = `
-        <p>Tienes ${totalItems} items y el total de la compra es: US$ ${totalPrice.toFixed(2)}</p>
-        <button type="button">Comprar!</button>
-        `
-}
-
+//Función que renderiza el carrito
 function renderCart() {
     cartHtml.innerHTML = "";
-    cart.forEach((item) =>
+    cart.forEach((product) =>
         cartHtml.innerHTML += `
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src=${item.img} class="img-fluid rounded-start" alt=${item.name}>
+                    <img src=${product.img} class="img-fluid rounded-start" alt=${product.name}>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h6 class="card-title">${item.name}</h6>
-                        <p class="card-text"><small class="text">En Stock: ${item.stock}</small></p>
-                        <p class="card-text"><small class="text">US$ ${item.price}</small></p>
+                        <h6 class="card-title">${product.name}</h6>
+                        <p class="card-text"><small class="text">En Stock: ${product.stock}</small></p>
+                        <p class="card-text"><small class="text">US$ ${product.price}</small></p>
                         <div class="units">
-                            <button type="button" class="btnMinus" onclick="changeNumberOfUnits('minus',${item.id})">-</button>
-                            <div class="number">${item.numberOfUnits}</div>
-                            <button type="button" class="btnPlus" onclick="changeNumberOfUnits('plus',${item.id})">+</button>          
+                            <button type="button" class="btnMinus" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
+                            <div class="number">${product.numberOfUnits}</div>
+                            <button type="button" class="btnPlus" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
                         </div>
                     </div>
                 </div>
@@ -245,31 +232,42 @@ function renderCart() {
     `)
 }
 
+//Función que calcula total en carrito
+function renderTotal() {
+    let totalPrice = 0;
+    let totalProducts = 0;
+    cart.forEach((product) => {
+        totalPrice += product.price * product.numberOfUnits;
+        totalProducts += product.numberOfUnits;
+    });
+    canvasSubtitle.innerHTML = `
+        <p>Tienes ${totalProducts} items y el total de la compra es: US$ ${totalPrice.toFixed(2)}</p>
+        <button type="button">Comprar!</button>
+        `
+}
 
 //Cambio de numero de unidades en el carrito 
 function changeNumberOfUnits(action, id) {
     cartHtml.innerHTML = "";
-    cart = cart.map((item) => {
-        let numberOfUnits = item.numberOfUnits;
+    cart = cart.map((product) => {
+        let numberOfUnits = product.numberOfUnits;
 
-        if (item.id === id) {
-            if (action === "plus" && numberOfUnits < item.stock) {
+        if (product.id === id) {
+            if (action === "plus" && numberOfUnits < product.stock) {
                 numberOfUnits++;
             } else if (action === "minus" && numberOfUnits > 1) {
                 numberOfUnits--;
             }
         }
-
         return {
-            ...item,
+            ...product,
             numberOfUnits,
         };
     }),
         updateCart();
 }
 
-
-
+//Calculadora de Dolares a Pesos (Deprecada para el proyecto en la forma planteada)
 const calculate = () => {
     let valueDolar = document.getElementById("valueDolar").value;
     let total = document.getElementById("total");
@@ -284,7 +282,6 @@ const calculate = () => {
         <h3>Tienes que pagar UY$${valueDolar} pesos Uruguayos</h3>
         `
 }
-
 
 //Escuchadores de Eventos
 document.getElementById("forAToZ").addEventListener("click", function () { forAToZ(products) });
