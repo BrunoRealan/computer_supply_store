@@ -1,3 +1,9 @@
+//Variables de elementos capturados del DOM
+let cartHtml = document.getElementById("cartHtml"),
+    btnPlus = document.getElementsByClassName("btnMinus"),
+    btnMinus = document.getElementsByClassName("btnPlus"),
+    canvasSubtitle = document.getElementById("canvasSubtitle");
+
 //Array de Productos
 let products = [{
     id: 0,
@@ -127,18 +133,13 @@ let products = [{
     stock: 2,
     price: 774.99,
 }];
-//Arrays vacios de utilidad
-let newArray = [],
-    cart = [];
-//Variables de elementos del DOM
-let cartHtml = document.getElementById("cartHtml"),
-    btnPlus = document.getElementsByClassName("btnMinus"),
-    btnMinus = document.getElementsByClassName("btnPlus"),
-    canvasSubtitle = document.getElementById("canvasSubtitle");
+//Arrays vacio de utilidad
+let newArray = [];
+//Array Carrito
+let cart = JSON.parse(localStorage.getItem("Cart")) || [];
+updateCart();
 
-
-
-//Funcion para renderizar productos
+//Función para renderizar productos
 function showProducts(array) {
     let products = "";
     array.forEach((product) => {
@@ -183,7 +184,6 @@ function forMayorTo(array) {
     showProducts(newArray);
 }
 
-
 //Función que suma productos al carrito
 function addToCart(id) {
     cartHtml.innerHTML = "";
@@ -203,6 +203,9 @@ function addToCart(id) {
 function updateCart() {
     renderCart();
     renderTotal();
+
+    //Guardando carrito en LocalStorage
+    localStorage.setItem("Cart", JSON.stringify(cart));
 }
 
 //Función que renderiza el carrito
@@ -213,7 +216,7 @@ function renderCart() {
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src=${product.img} class="img-fluid rounded-start" alt=${product.name}>
+                    <img src=${product.img} class="img-fluid rounded-start" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -232,7 +235,7 @@ function renderCart() {
     `)
 }
 
-//Función que calcula total en carrito
+//Función que calcula total en carrito (btn de compra no funciona aún)
 function renderTotal() {
     let totalPrice = 0;
     let totalProducts = 0;
@@ -242,8 +245,15 @@ function renderTotal() {
     });
     canvasSubtitle.innerHTML = `
         <p>Tienes ${totalProducts} items y el total de la compra es: US$ ${totalPrice.toFixed(2)}</p>
-        <button type="button">Comprar!</button>
+        <button type="button" onclick="">Comprar!</button>
         `
+        //Intentaba usar onclick="buyCart(${cart})" 
+}
+
+//Funcíon que retira un producto del carrito
+function removeProductFromCart(id) {
+    cart = cart.filter((product) => product.id !== id)
+    updateCart()
 }
 
 //Cambio de numero de unidades en el carrito 
@@ -265,6 +275,16 @@ function changeNumberOfUnits(action, id) {
         };
     }),
         updateCart();
+}
+
+//Función del Boton Comprar (Da error, lógica incorrecta?)
+
+function buyCart(array) {
+    if (!array.length) {
+        alert("¡No hay productos para comprar!")
+    } else {
+        alert("Compra satisfactoria");
+    }
 }
 
 //Calculadora de Dolares a Pesos (Deprecada para el proyecto en la forma planteada)
