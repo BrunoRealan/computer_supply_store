@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 header {
     background-color: rgb(73, 78, 114);
 }
@@ -59,11 +64,17 @@ h5 {
     right: 1.5em;
 }
 
+.cartBuyBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .units {
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:right;
+    justify-content: right;
     gap: 0.5em;
 }
 
@@ -71,7 +82,7 @@ h5 {
     width: 1rem;
 }
 
-.img-fluid:hover{
+.img-fluid:hover {
     border: 0.25em;
     border-color: darkkhaki;
     border-style: groove;
@@ -80,6 +91,6 @@ h5 {
 .offcanvas-footer {
     width: 100%;
     height: 5em;
-    background-color: rgb(114, 99, 38);
+    background-color: rgba(255, 216, 87, 0.925);
 
 }

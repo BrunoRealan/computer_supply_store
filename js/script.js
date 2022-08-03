@@ -245,7 +245,9 @@ function renderTotal() {
     });
     canvasSubtitle.innerHTML = `
         <p>Tienes ${totalProducts} items y el total de la compra es: US$ ${totalPrice.toFixed(2)}</p>
-        <button type="button" onclick="">Comprar!</button>
+        <div class="cartBuyBtn">
+            <button type="button" onclick="">Comprar!</button>
+        </div>
         `
         //Intentaba usar onclick="buyCart(${cart})" 
 }
@@ -278,7 +280,7 @@ function changeNumberOfUnits(action, id) {
 }
 
 //Función del Boton Comprar (Da error, lógica incorrecta? el problema es al parcear JSON en let cart?)
-
+//(!array.lenght===array.length=0 ? en este caso)
 function buyCart(array) {
     if (!array.lenght) {
         alert("¡No hay productos para comprar!")
