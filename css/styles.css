@@ -1,17 +1,23 @@
 * {
     margin: 0;
     padding: 0;
+    transition: all 0.4s;
 }
 
-header {
-    background-color: rgb(73, 78, 114);
+nav {
+    background-color: rgb(255, 194, 139);
+    height: 7em;
+}
+
+.title {
+    font-size: 1.5em;
 }
 
 footer {
     display: flex;
     justify-content: center;
     height: 5em;
-    background-color: bisque;
+    background-color: rgb(240, 190, 160);
 }
 
 body {
@@ -28,6 +34,16 @@ img {
     padding-top: 10px;
     height: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}
+
+.card:hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(0, -2px);
+}
+
+.cassificatorBtn-btn:hover{
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(0, -2px);
 }
 
 .bi {
