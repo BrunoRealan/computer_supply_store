@@ -49,7 +49,8 @@ let products = [{
     description: "Conéctate con tu gente usando Full HD 1080p en Skype, o HD 720p de gran fluidez en FaceTime para Mac. También puedes tener videoconferencias de alta calidad usando Google Hangouts™ y clientes de videoconferencias.",
     stock: 7,
     price: 104.99,
-},{
+},
+{
     id: 5,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/05/71xCcwQ0aPL._AC_SS450_64310_ba466f3906ae40fb94c61fa5b3a2b552-300x300.jpg",
     name: "Webcam Razer Kiyo PRO",
@@ -57,16 +58,18 @@ let products = [{
     description: "Logre estándares de video profesional para transmisión y videoconferencia con Razer Kiyo Pro, una cámara web USB FHD que tiene un sensor de luz adaptativo de alto rendimiento.",
     stock: 4,
     price: 198.99,
-},{
-    id: 2,
+},
+{
+    id: 6,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/03/1amda-300x300.jpg",
     name: "Equipo AMD Athlon 3000G Radeon™ Vega 3 Graphics",
     type: "equipos",
     description: "Con procesador AMD Athlon 3000G 3,5Ghz, Memoria 8Gb DDR4...",
     stock: 6,
     price: 370,
-},,{
-    id: 3,
+},
+{
+    id: 7,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/01/nx800ryz-300x300.jpg",
     name: "Equipo AMD Ryzen 9 5900X Full Gamer 32gb",
     type: "equipos",
@@ -75,7 +78,7 @@ let products = [{
     price: 3500,
 },
 {
-    id: 4,
+    id: 8,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2019/01/3346647pro_1e882c7f407a4fd2bcc846a6691947c7-300x300.jpg",
     name: "Mouse Logitech PRO HERO",
     type: "Mouses",
@@ -84,7 +87,7 @@ let products = [{
     price: 40.99,
 },
 {
-    id: 5,
+    id: 9,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2019/11/g502-inal-300x300.png",
     name: "Mouse Logitech G502 Lightspeed Wireless",
     type: "Mouses",
@@ -93,7 +96,7 @@ let products = [{
     price: 111,
 },
 {
-    id: 6,
+    id: 10,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/10/ns158665_9a7f744fbfb4454884dcaec407b8ef12-300x300.jpg",
     name: "Nintendo Switch Animal Crossing: New Horizons Edition",
     type: "Consolas",
@@ -102,7 +105,7 @@ let products = [{
     price: 550,
 },
 {
-    id: 7,
+    id: 11,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/01/NSOL4915_15ab859551cd4b7ebf99e48b9df3a2b4-300x300.jpg",
     name: "Nintendo Switch Modelo OLED",
     type: "Consolas",
@@ -111,7 +114,7 @@ let products = [{
     price: 650,
 },
 {
-    id: 8,
+    id: 12,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/11/xbx93033_ce586eb4263a4b029491fc27138d79d0-300x300.jpg",
     name: "Microsoft Xbox Serie X",
     type: "Consolas",
@@ -120,7 +123,7 @@ let products = [{
     price: 1000,
 },
 {
-    id: 9,
+    id: 13,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/08/4848_1865172668bce4ba0be1acbf7c01d8d5d-300x300.webp",
     name: "Sony PlayStation 5 Digital Horizon Edition",
     type: "Consolas",
@@ -129,7 +132,7 @@ let products = [{
     price: 1300,
 },
 {
-    id: 10,
+    id: 14,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/05/3986_2_1c3fe20121cc4a00ab61e429ef87e847-300x300.png",
     name: "GPU EVGA Geforce RTX 3080 FTW3 ULTRA 12Gb GDDR6X",
     type: "Tarjetas Gráficas",
@@ -138,7 +141,7 @@ let products = [{
     price: 1950,
 },
 {
-    id: 11,
+    id: 15,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/06/670041897_8f411624da3f4038bca7a07aed637f86-300x300.jpg",
     name: "GPU MSI Radeon RX6700 XT GAMING X 12G",
     type: "Tarjetas Gráficas",
@@ -147,7 +150,7 @@ let products = [{
     price: 1290,
 },
 {
-    id: 12,
+    id: 16,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/08/canon44223_dc350658f0de4be8a03a0c717278915f-300x300.jpg",
     name: "Impresora Multifunción Canon MG2410",
     type: "Impresoras",
@@ -156,7 +159,7 @@ let products = [{
     price: 56,
 },
 {
-    id: 13,
+    id: 17,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/02/41525140_4dca952349a7434480f393538c694529-300x300.jpg",
     name: "Impresora Multifunción HP Ink Tank Wireless 415",
     type: "Impresoras",
@@ -165,7 +168,7 @@ let products = [{
     price: 250,
 },
 {
-    id: 14,
+    id: 18,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/12/hh115n36636_dad301c2f11345a2a5770927a62194bd-300x300.jpg",
     name: "Silla HHGears SM115 Black",
     type: "Sillas gamer",
@@ -174,7 +177,7 @@ let products = [{
     price: 164.99,
 },
 {
-    id: 15,
+    id: 19,
     img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/12/cargo60930_79797f1c8387484686df5562783eff88-300x300.jpg",
     name: "Silla Cougar Argo Orange",
     type: "Sillas gamer",
@@ -197,7 +200,6 @@ function showProducts(array) {
         products += `
             <div class="col">
                 <div class="card">
-                    <i class="bi bi-heart"></i>
                     <img src=${product.img} class="card-img-top p-4"
                         alt=${product.name}>
                     <div class="card-body text-center">
@@ -266,10 +268,10 @@ function renderCart() {
         cartHtml.innerHTML += `
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-4">
                     <img src=${product.img} class="img-fluid rounded-start p-2" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
                 </div>
-                <div class="col-md-8">
+                <div class="col-8">
                     <div class="card-body">
                         <h6 class="card-title">${product.name}</h6>
                         <p class="card-text"><small class="text">En Stock: ${product.stock}</small></p>
@@ -289,13 +291,20 @@ function renderCart() {
 //Función que calcula total en carrito (btn de compra no funciona aún)
 function renderTotal() {
     let totalPrice = 0;
+    let totalPricePesos = 0;
     let totalProducts = 0;
+    let valuePeso = 42.35;
     cart.forEach((product) => {
         totalPrice += product.price * product.numberOfUnits;
+        totalPricePesos += (product.price * product.numberOfUnits) * valuePeso;
         totalProducts += product.numberOfUnits;
     });
     canvasSubtitle.innerHTML = `
-        <p>Tienes ${totalProducts} items y el total de la compra es: US$ ${totalPrice.toFixed(2)}</p>
+        <div class="all-p-cart">
+            <p class="p-cart">Tienes (${totalProducts}) items en el carrito.</p>
+            <p class="p-cart">El total de la compra en dolares es: US$ ${totalPrice.toFixed(2)}</p>
+            <p class="p-cart">O en pesos uruguayos: $ ${Math.round(totalPricePesos)}</p>
+        </div>
         <div class="cartBuyBtn">
             <button type="button" onclick="buyCart()">Comprar!</button>
         </div>
@@ -311,7 +320,7 @@ function removeProductFromCart(id) {
     updateCart()
 }
 
-//Cambio de numero de unidades en el carrito 
+//Funcion cambio de numero de unidades en el carrito 
 function changeNumberOfUnits(action, id) {
     cartHtml.innerHTML = "";
     cart = cart.map((product) => {
@@ -332,43 +341,22 @@ function changeNumberOfUnits(action, id) {
         updateCart();
 }
 
-//Función del Boton Comprar (Da error, lógica incorrecta? el problema es al parcear JSON en let cart?)
-//(!array.lenght===array.length=0 ? en este caso)
+//Función del Boton Comprar (necesito retirar si coincide id, numberOfUnits del mismo objeto del array "products"
 function buyCart() {
-    if (cart.lenght === 0) {
+    if (cart.length === 0) {
         alert("Necesitas productos para comprar")
     } else {
-        cart = cart.splice(0, cart.lenght);
-        console.log(cart);
+        for (const item of cart) {
+            console.log(item);
+            /* if (item.id == products.id) {
+                products.stock-- */
+            }
+        cart = [];
         alert("La compra a sido realizada");
         updateCart();
     }
-
-    /* if (!array.lenght) {
-        alert("¡No hay productos para comprar!")
-    } else {
-        alert("Compra satisfactoria");
-        //Clear Cart
-        //updateCart()
-    } */
 }
-
-//Calculadora de Dolares a Pesos (Deprecada para el proyecto en la forma planteada)
-const calculate = () => {
-    let valueDolar = document.getElementById("valueDolar").value;
-    let total = document.getElementById("total");
-
-    let valuePeso = 42;
-    let iva = +valueDolar * (24 / 100);
-    let impPeso = +valueDolar * (5 / 100);
-
-    valueDolar = valuePeso * +valueDolar + iva + impPeso
-
-    total.innerHTML = `
-        <h3>Tienes que pagar UY$${valueDolar} pesos Uruguayos</h3>
-        `
-}
-
+    
 //Escuchadores de Eventos
 document.getElementById("forAToZ").addEventListener("click", function () { forAToZ(products) });
 document.getElementById("forZToA").addEventListener("click", function () { forZToA(products) });

@@ -20,16 +20,6 @@ footer {
     background-color: rgb(240, 190, 160);
 }
 
-body {
-    padding: 0;
-    margin: 0;
-    font-family: "Nunito Sans";
-}
-
-img {
-    height: 230px;
-}
-
 .card {
     padding-top: 10px;
     height: 100%;
@@ -46,13 +36,6 @@ img {
     transform: translate(0, -2px);
 }
 
-.bi {
-    text-align: right;
-    padding-right: 10px;
-    font-size: 26px;
-    cursor: pointer;
-}
-
 h5 {
     padding-top: 15px;
 }
@@ -60,18 +43,6 @@ h5 {
 .btn {
     padding: 5px 25px;
     margin-top: 10px;
-}
-
-@media(max-width: 768px) {
-    img {
-        height: 100%;
-    }
-}
-
-@media(max-width: 575px) {
-    .container {
-        width: 90%;
-    }
 }
 
 .cart-btn {
@@ -82,8 +53,14 @@ h5 {
 
 .cartBuyBtn {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    margin-top: 1em;
+}
+
+.cartBuyBtn:hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(0, -2px);
 }
 
 .units {
@@ -106,7 +83,13 @@ h5 {
 
 .offcanvas-footer {
     width: 100%;
-    height: 5em;
+    height: 13em;
     background-color: rgba(255, 216, 87, 0.925);
+}
 
+.all-p-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
 }
