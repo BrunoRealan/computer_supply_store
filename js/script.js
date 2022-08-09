@@ -288,6 +288,9 @@ function renderCart() {
     `)
 }
 
+
+
+
 //Función que calcula total en carrito (btn de compra no funciona aún)
 function renderTotal() {
     let totalPrice = 0;
@@ -306,7 +309,7 @@ function renderTotal() {
             <p class="p-cart">O en pesos uruguayos: $ ${Math.round(totalPricePesos)}</p>
         </div>
         <div class="cartBuyBtn">
-            <button type="button" onclick="buyCart()">Comprar!</button>
+            <button id="buyCartBtn" type="button">Comprar!</button>
         </div>
         `
     //Intentaba usar onclick="buyCart(${cart})" 
@@ -342,23 +345,33 @@ function changeNumberOfUnits(action, id) {
 }
 
 //Función del Boton Comprar (necesito retirar si coincide id, numberOfUnits del mismo objeto del array "products"
-function buyCart() {
-    if (cart.length === 0) {
-        alert("Necesitas productos para comprar")
+function buyCart(array) {
+    if (array.length === 0) {
+        swal.fire({
+            icon: "error",
+            title: "Carrito Vacío",
+            text: "Necesitas tener productos en el carrito antes de comprar",
+        })
     } else {
-        for (const item of cart) {
+        for (const item of array) {
             console.log(item);
             /* if (item.id == products.id) {
                 products.stock-- */
-            }
+        }
         cart = [];
-        alert("La compra a sido realizada");
+        //alert("La compra a sido realizada");
+        swal.fire({
+            icon: "success",
+            title: "La compra realizada",
+            text: "Puedes seguir comprando si lo deseas!",
+        })
         updateCart();
     }
 }
-    
+
 //Escuchadores de Eventos
-document.getElementById("forAToZ").addEventListener("click", function () { forAToZ(products) });
-document.getElementById("forZToA").addEventListener("click", function () { forZToA(products) });
-document.getElementById("forMinusTo").addEventListener("click", function () { forMinusTo(products) });
-document.getElementById("forMayorTo").addEventListener("click", function () { forMayorTo(products) });
+document.getElementById("buyCartBtn").addEventListener("click", () => buyCart(cart));
+document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
+document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
+document.getElementById("forMinusTo").addEventListener("click", () => forMinusTo(products));
+document.getElementById("forMayorTo").addEventListener("click", () => forMayorTo(products));
