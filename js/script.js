@@ -257,6 +257,12 @@ function addToCart(id) {
     if (cart.some((product) => product.id === id)) {
         changeNumberOfUnits("plus", id);
     } else {
+        Swal.fire({
+            icon: 'success',
+            title: 'El articulo se agregó al carrito',
+            showConfirmButton: false,
+            timer: 1300
+        })
         const product = products.find((product) => product.id === id)
         cart.push({
             ...product,
@@ -328,6 +334,13 @@ function renderTotal() {
 //Funcíon que retira un producto del carrito
 function removeProductFromCart(id) {
     cart = cart.filter((product) => product.id !== id)
+    Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'El articulo se borró del carrito',
+        showConfirmButton: false,
+        timer: 1500
+    })
     updateCart()
 }
 
@@ -359,6 +372,8 @@ function buyCart(array) {
             icon: "error",
             title: "Error!",
             text: "No tienes productos en el carrito",
+            showConfirmButton: false,
+            timer: 1500
         })
     } else {
         let productsID = cart.map((product) => product.id);
@@ -380,7 +395,7 @@ function buyCart(array) {
 }
 
 //Escuchadores de Eventos
-window.addEventListener("load",showProducts(products))
+window.addEventListener("load", showProducts(products))
 formBtn.addEventListener("click", () => showBySearch())
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
