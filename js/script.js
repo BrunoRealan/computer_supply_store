@@ -2,7 +2,9 @@
 let cartHtml = document.getElementById("cartHtml"),
     btnPlus = document.getElementsByClassName("btnMinus"),
     btnMinus = document.getElementsByClassName("btnPlus"),
-    canvasSubtitle = document.getElementById("canvasSubtitle");
+    canvasSubtitle = document.getElementById("canvasSubtitle"),
+    form = document.getElementById("form"),
+    formBtn = document.getElementById("formBtn");
 
 //Array de Productos
 let products = [{
@@ -216,6 +218,18 @@ function showProducts(array) {
     });
 }
 
+function showBySearch() {
+    let searchValue = form.value;
+    const fuse = new Fuse(products, {
+        keys: ['name', 'type']
+    })
+
+    const results = fuse.search(searchValue);
+
+    showProducts(results)
+    console.log("results", results);
+}
+
 //Funciones para organizar productos según categoría
 function forAToZ(array) {
     newArray = array.sort((a, b) => a.name.localeCompare(b.name));
@@ -288,9 +302,6 @@ function renderCart() {
     `)
 }
 
-
-
-
 //Función que calcula total en carrito (btn de compra no funciona aún)
 function renderTotal() {
     let totalPrice = 0;
@@ -309,12 +320,9 @@ function renderTotal() {
             <p class="p-cart">O en pesos uruguayos: $ ${Math.round(totalPricePesos)}</p>
         </div>
         <div class="cartBuyBtn">
-            <button id="buyCartBtn" type="button">Comprar!</button>
+            <button onclick="buyCart(cart)" type="button">Comprar!</button>
         </div>
         `
-    //Intentaba usar onclick="buyCart(${cart})" 
-    //Intentaba usar onclick="buyCart(${cart})" 
-    //Intentaba usar onclick="buyCart(${cart})" 
 }
 
 //Funcíon que retira un producto del carrito
@@ -346,31 +354,25 @@ function changeNumberOfUnits(action, id) {
 
 //Función del Boton Comprar (necesito retirar si coincide id, numberOfUnits del mismo objeto del array "products"
 function buyCart(array) {
-    if (array.length === 0) {
-        swal.fire({
-            icon: "error",
-            title: "Carrito Vacío",
-            text: "Necesitas tener productos en el carrito antes de comprar",
-        })
-    } else {
-        for (const item of array) {
-            console.log(item);
-            /* if (item.id == products.id) {
-                products.stock-- */
-        }
-        cart = [];
-        //alert("La compra a sido realizada");
-        swal.fire({
-            icon: "success",
-            title: "La compra realizada",
-            text: "Puedes seguir comprando si lo deseas!",
-        })
-        updateCart();
-    }
+    let productsID = cart.map((product) => product.id);
+    console.log(productsID);
+    /*         let search = products.includes(productsID)
+            if(search){
+                console.log("te encontre elemento");
+            } */
+
+    //console.log(productsID);
+    cart = [];
+    swal.fire({
+        icon: "success",
+        title: "La compra realizada",
+        text: "Puedes seguir comprando si lo deseas!",
+    })
+    updateCart();
 }
 
 //Escuchadores de Eventos
-document.getElementById("buyCartBtn").addEventListener("click", () => buyCart(cart));
+formBtn.addEventListener("click", () => showBySearch())
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
 document.getElementById("forMinusTo").addEventListener("click", () => forMinusTo(products));
