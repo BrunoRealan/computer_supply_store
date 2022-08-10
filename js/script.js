@@ -354,24 +354,33 @@ function changeNumberOfUnits(action, id) {
 
 //Función del Boton Comprar (necesito retirar si coincide id, numberOfUnits del mismo objeto del array "products"
 function buyCart(array) {
-    let productsID = cart.map((product) => product.id);
-    console.log(productsID);
-    /*         let search = products.includes(productsID)
-            if(search){
-                console.log("te encontre elemento");
-            } */
+    if (array.length === 0) {
+        swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: "No tienes productos en el carrito",
+        })
+    } else {
+        let productsID = cart.map((product) => product.id);
+        console.log(productsID);
+        /*         let search = products.includes(productsID)
+                if(search){
+                    console.log("te encontre elemento");
+                } */
 
-    //console.log(productsID);
-    cart = [];
-    swal.fire({
-        icon: "success",
-        title: "La compra realizada",
-        text: "Puedes seguir comprando si lo deseas!",
-    })
-    updateCart();
+        //console.log(productsID);
+        cart = [];
+        swal.fire({
+            icon: "success",
+            title: "La compra fue un éxito",
+            text: "Puedes seguir comprando si lo deseas!",
+        })
+        updateCart();
+    }
 }
 
 //Escuchadores de Eventos
+window.addEventListener("load",showProducts(products))
 formBtn.addEventListener("click", () => showBySearch())
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
