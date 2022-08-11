@@ -207,9 +207,9 @@ function showProducts(array) {
                     <div class="card-body text-center">
                         <h5 class="card-name">${product.name}</h5>
                         <h6 class="card-text">${product.description}</h6>
-                        <h5 class="card-text text-danger">US$ ${product.price}</h5>
+                        <h5 class="card-text text-success">US$ ${product.price}</h5>
                         <p class="card-text"><small class="text-muted">En Stock: ${product.stock}</small></p>
-                        <button type="button" class="btn btn-outline-primary" onclick="addToCart(${product.id})">Agregar al Carrito</button>
+                        <button type="button" class="btn btn-outline-danger" onclick="addToCart(${product.id})">Agregar al Carrito</button>
                     </div>
                 </div>
             </div>`,
