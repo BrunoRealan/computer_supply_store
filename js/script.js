@@ -299,7 +299,7 @@ function renderCart() {
                         <div class="units">
                             <button type="button" class="btnMinus" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
                             <div class="number">${product.numberOfUnits}</div>
-                            <button type="button" class="btnPlus" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
+                            <button type="button" class="btnPlus btn btn-warning btn-sm" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
                         </div>
                     </div>
                 </div>
