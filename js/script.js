@@ -2,6 +2,7 @@
 let cartHtml = document.getElementById("cartHtml"),
     btnPlus = document.getElementsByClassName("btnMinus"),
     btnMinus = document.getElementsByClassName("btnPlus"),
+    unitsNumber = document.getElementsByClassName("unitsNumber")
     canvasSubtitle = document.getElementById("canvasSubtitle"),
     form = document.getElementById("form"),
     formBtn = document.getElementById("formBtn");
@@ -205,9 +206,9 @@ function showProducts(array) {
                     <img src=${product.img} class="card-img-top p-4"
                         alt=${product.name}>
                     <div class="card-body text-center">
-                        <h5 class="card-name">${product.name}</h5>
-                        <h6 class="card-text">${product.description}</h6>
-                        <h5 class="card-text text-success">US$ ${product.price}</h5>
+                        <h3 class="card-name">${product.name}</h3>
+                        <h4 class="card-text">${product.description}</h4>
+                        <h3 class="card-text text-success">US$ ${product.price}</h3>
                         <p class="card-text"><small class="text-muted">En Stock: ${product.stock}</small></p>
                         <button type="button" class="btn btn-outline-danger" onclick="addToCart(${product.id})">Agregar al Carrito</button>
                     </div>
@@ -297,8 +298,8 @@ function renderCart() {
                         <p class="card-text"><small class="text">En Stock: ${product.stock}</small></p>
                         <p class="card-text"><small class="text">US$ ${product.price}</small></p>
                         <div class="units">
-                            <button type="button" class="btnMinus" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
-                            <div class="number">${product.numberOfUnits}</div>
+                            <button type="button" class="btnMinus btn btn-warning btn-sm" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
+                            <div class="number unitsNumber">${product.numberOfUnits}</div>
                             <button type="button" class="btnPlus btn btn-warning btn-sm" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
                         </div>
                     </div>
@@ -377,6 +378,7 @@ function buyCart(array) {
         })
     } else {
         let productsID = cart.map((product) => product.id);
+
         console.log(productsID);
         /*         let search = products.includes(productsID)
                 if(search){
@@ -395,8 +397,8 @@ function buyCart(array) {
 }
 
 //Escuchadores de Eventos
-window.addEventListener("load", showProducts(products))
-formBtn.addEventListener("click", () => showBySearch())
+window.addEventListener("load", showProducts(products));
+formBtn.addEventListener("click", () => showBySearch());
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
 document.getElementById("forMinusTo").addEventListener("click", () => forMinusTo(products));
