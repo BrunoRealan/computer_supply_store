@@ -2,195 +2,20 @@
 let cartHtml = document.getElementById("cartHtml"),
     btnPlus = document.getElementsByClassName("btnMinus"),
     btnMinus = document.getElementsByClassName("btnPlus"),
-    unitsNumber = document.getElementsByClassName("unitsNumber")
+    unitsNumber = document.getElementsByClassName("unitsNumber"),
     canvasSubtitle = document.getElementById("canvasSubtitle"),
     form = document.getElementById("form"),
     formBtn = document.getElementById("formBtn");
 
 //Array de Productos
-let products = [{
-    id: 0,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2020/10/2_500-1-300x300.jpg",
-    name: "Monior LG 20MK400H 20″",
-    type: "monitores",
-    description: "Es un buen monitor para todo tipo de usos.",
-    stock: 7,
-    price: 150,
-},
-{
-    id: 1,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2018/02/s-390-300x300.png",
-    name: "Monitor Samsung Curvo C24F390FHL 24″",
-    type: "monitores",
-    description: "Es un buen monitor gamer confiable.",
-    stock: 4,
-    price: 225,
-},
-{
-    id: 2,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/06/3153_1_596e489d69f24246890787966100f846-300x300.jpg",
-    name: "Monitor Cooler Master GM34-CW2 UWQHD 1440p 144hz",
-    type: "monitores",
-    description: "La pantalla ultra ancha de 34″ ofrece un juego inigualable y una experiencia cinematográfica sorprendente.",
-    stock: 5,
-    price: 890,
-},
-{
-    id: 3,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2017/04/960-000582_22_1600x1600_818d72705aa44e9091b43d4f83fe1263-300x300.jpg",
-    name: "Webcam Logitech C270",
-    type: "webcam",
-    description: "Tecnología Logitech Fluid Crystal™. Para hacer mejores las cámaras Web Logitech. Vídeo más fluido, imágenes más nítidas, colores más vivos y sonido más claro en condiciones reales.",
-    stock: 6,
-    price: 35.99,
-},
-{
-    id: 4,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2017/05/c920e-300x300.jpg",
-    name: "Webcam Logitech C920e",
-    type: "webcam",
-    description: "Conéctate con tu gente usando Full HD 1080p en Skype, o HD 720p de gran fluidez en FaceTime para Mac. También puedes tener videoconferencias de alta calidad usando Google Hangouts™ y clientes de videoconferencias.",
-    stock: 7,
-    price: 104.99,
-},
-{
-    id: 5,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/05/71xCcwQ0aPL._AC_SS450_64310_ba466f3906ae40fb94c61fa5b3a2b552-300x300.jpg",
-    name: "Webcam Razer Kiyo PRO",
-    type: "webcam",
-    description: "Logre estándares de video profesional para transmisión y videoconferencia con Razer Kiyo Pro, una cámara web USB FHD que tiene un sensor de luz adaptativo de alto rendimiento.",
-    stock: 4,
-    price: 198.99,
-},
-{
-    id: 6,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/03/1amda-300x300.jpg",
-    name: "Equipo AMD Athlon 3000G Radeon™ Vega 3 Graphics",
-    type: "equipos",
-    description: "Con procesador AMD Athlon 3000G 3,5Ghz, Memoria 8Gb DDR4...",
-    stock: 6,
-    price: 370,
-},
-{
-    id: 7,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/01/nx800ryz-300x300.jpg",
-    name: "Equipo AMD Ryzen 9 5900X Full Gamer 32gb",
-    type: "equipos",
-    description: "Con procesador AMD Ryzen 9 5900X, Memoria 32Gb DDR4...",
-    stock: 3,
-    price: 3500,
-},
-{
-    id: 8,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2019/01/3346647pro_1e882c7f407a4fd2bcc846a6691947c7-300x300.jpg",
-    name: "Mouse Logitech PRO HERO",
-    type: "Mouses",
-    description: "Exelente Mouse especial para juegos shooter...",
-    stock: 14,
-    price: 40.99,
-},
-{
-    id: 9,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2019/11/g502-inal-300x300.png",
-    name: "Mouse Logitech G502 Lightspeed Wireless",
-    type: "Mouses",
-    description: "Exelente Mouse inalámbrico especial para juegos shooter.",
-    stock: 9,
-    price: 111,
-},
-{
-    id: 10,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/10/ns158665_9a7f744fbfb4454884dcaec407b8ef12-300x300.jpg",
-    name: "Nintendo Switch Animal Crossing: New Horizons Edition",
-    type: "Consolas",
-    description: "Este sistema Nintendo Switch se inspira en el diseño del nuevo juego Animal Crossing: New Horizons.",
-    stock: 5,
-    price: 550,
-},
-{
-    id: 11,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/01/NSOL4915_15ab859551cd4b7ebf99e48b9df3a2b4-300x300.jpg",
-    name: "Nintendo Switch Modelo OLED",
-    type: "Consolas",
-    description: "Cuenta con una vibrante pantalla OLED de 7 pulgadas (17.78 cm), un soporte ajustable y amplio.",
-    stock: 3,
-    price: 650,
-},
-{
-    id: 12,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/11/xbx93033_ce586eb4263a4b029491fc27138d79d0-300x300.jpg",
-    name: "Microsoft Xbox Serie X",
-    type: "Consolas",
-    description: "La consola más potente de esta nueva generación, hasta 120 Cuadros por segundo.",
-    stock: 9,
-    price: 1000,
-},
-{
-    id: 13,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/08/4848_1865172668bce4ba0be1acbf7c01d8d5d-300x300.webp",
-    name: "Sony PlayStation 5 Digital Horizon Edition",
-    type: "Consolas",
-    description: "Disfruta de la potencia de una CPU, una GPU y una SSD personalizadas con E/S integradas que redefinirán lo que una consola PlayStation puede hacer.",
-    stock: 7,
-    price: 1300,
-},
-{
-    id: 14,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/05/3986_2_1c3fe20121cc4a00ab61e429ef87e847-300x300.png",
-    name: "GPU EVGA Geforce RTX 3080 FTW3 ULTRA 12Gb GDDR6X",
-    type: "Tarjetas Gráficas",
-    description: "Exelente tarjeta gráfica con tecnología Ray Tracing® de Nvidia.",
-    stock: 2,
-    price: 1950,
-},
-{
-    id: 15,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/06/670041897_8f411624da3f4038bca7a07aed637f86-300x300.jpg",
-    name: "GPU MSI Radeon RX6700 XT GAMING X 12G",
-    type: "Tarjetas Gráficas",
-    description: "12GB de memoria GDDR6 dedicada, proyectadas para ofrecer FPS ultra altos y el juego poderoso con resolución 1440p.",
-    stock: 4,
-    price: 1290,
-},
-{
-    id: 16,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/08/canon44223_dc350658f0de4be8a03a0c717278915f-300x300.jpg",
-    name: "Impresora Multifunción Canon MG2410",
-    type: "Impresoras",
-    description: "Si desea imprimir fotografías de calidad y documentos nítidos, la impresora multifuncional de inyección de tinta PIXMA MG2410 es la impresora para usted.",
-    stock: 18,
-    price: 56,
-},
-{
-    id: 17,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2022/02/41525140_4dca952349a7434480f393538c694529-300x300.jpg",
-    name: "Impresora Multifunción HP Ink Tank Wireless 415",
-    type: "Impresoras",
-    description: "Imprima fácilmente grandes volúmenes con un costo por página muy bajo y obtenga una impresión móvil sencilla.",
-    stock: 13,
-    price: 250,
-},
-{
-    id: 18,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/12/hh115n36636_dad301c2f11345a2a5770927a62194bd-300x300.jpg",
-    name: "Silla HHGears SM115 Black",
-    type: "Sillas gamer",
-    description: "Buena silla gamer que te dará horas de juegos ininterrumpidas.",
-    stock: 8,
-    price: 164.99,
-},
-{
-    id: 19,
-    img: "https://thotcomputacion.com.uy/wp-content/uploads/2021/12/cargo60930_79797f1c8387484686df5562783eff88-300x300.jpg",
-    name: "Silla Cougar Argo Orange",
-    type: "Sillas gamer",
-    description: "construida con un marco de aluminio de primera calidad. Contiene una almohadilla de malla altamente transpirable que ofrece el máximo apoyo duradero para una experiencia de juego más cómoda.",
-    stock: 2,
-    price: 774.99,
-}];
+let products = [];
 
-//Arrays vacio de utilidad
-let newArray = [];
+function fetchData() {
+    fetch("https://brunorealan.github.io/computer_supply_store/json/products.json")
+        .then((response) => response.json())
+        .then((data) => products = data)
+        .then((products) => showProducts(products));
+}
 
 //Array Carrito
 let cart = JSON.parse(localStorage.getItem("Cart")) || [];
@@ -233,23 +58,23 @@ function showBySearch() {
 
 //Funciones para organizar productos según categoría
 function forAToZ(array) {
-    newArray = array.sort((a, b) => a.name.localeCompare(b.name));
-    showProducts(newArray);
+    products = array.sort((a, b) => a.name.localeCompare(b.name));
+    showProducts(products);
 }
 
 function forZToA(array) {
-    newArray = array.sort((a, b) => b.name.localeCompare(a.name));
-    showProducts(newArray);
+    products = array.sort((a, b) => b.name.localeCompare(a.name));
+    showProducts(products);
 }
 
 function forMinusTo(array) {
-    newArray = array.sort((a, b) => a.price - b.price);
-    showProducts(newArray);
+    products = array.sort((a, b) => a.price - b.price);
+    showProducts(products);
 }
 
 function forMayorTo(array) {
-    newArray = array.sort((a, b) => b.price - a.price);
-    showProducts(newArray);
+    products = array.sort((a, b) => b.price - a.price);
+    showProducts(products);
 }
 
 //Función que suma productos al carrito
@@ -263,8 +88,8 @@ function addToCart(id) {
             title: 'El articulo se agregó al carrito',
             showConfirmButton: false,
             timer: 1300
-        })
-        const product = products.find((product) => product.id === id)
+        });
+        const product = products.find((product) => product.id === id);
         cart.push({
             ...product,
             numberOfUnits: 1,
@@ -397,7 +222,7 @@ function buyCart(array) {
 }
 
 //Escuchadores de Eventos
-window.addEventListener("load", showProducts(products));
+window.addEventListener("DOMContentLoaded", fetchData());
 formBtn.addEventListener("click", () => showBySearch());
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
