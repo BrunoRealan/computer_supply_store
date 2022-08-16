@@ -10,16 +10,16 @@ let cartHtml = document.getElementById("cartHtml"),
 //Array de Productos
 let products = [];
 
+//Array Carrito
+let cart = JSON.parse(localStorage.getItem("Cart")) || [];
+
+//Función Fetch
 function fetchData() {
     fetch("https://brunorealan.github.io/computer_supply_store/json/products.json")
         .then((response) => response.json())
         .then((data) => products = data)
         .then((products) => showProducts(products));
 }
-
-//Array Carrito
-let cart = JSON.parse(localStorage.getItem("Cart")) || [];
-updateCart();
 
 //Función para renderizar productos
 function showProducts(array) {
@@ -80,7 +80,7 @@ function forMayorTo(array) {
 //Función que suma productos al carrito
 function addToCart(id) {
     cartHtml.innerHTML = "";
-    if (cart.some((product) => product.id === id)) {
+    if (cart.some((e) => e.id === id)) {
         changeNumberOfUnits("plus", id);
     } else {
         Swal.fire({
@@ -89,7 +89,8 @@ function addToCart(id) {
             showConfirmButton: false,
             timer: 1300
         });
-        const product = products.find((product) => product.id === id);
+        const product = products.find((e) => e.id === id)
+        console.log(product);
         cart.push({
             ...product,
             numberOfUnits: 1,
@@ -223,6 +224,7 @@ function buyCart(array) {
 
 //Escuchadores de Eventos
 window.addEventListener("DOMContentLoaded", fetchData());
+window.addEventListener("DOMContentLoaded", updateCart());
 formBtn.addEventListener("click", () => showBySearch());
 document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
 document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
