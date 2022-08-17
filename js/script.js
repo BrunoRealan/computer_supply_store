@@ -1,4 +1,4 @@
-//Variables de elementos capturados del DOM
+//Variables de elementos del DOM
 let cartHtml = document.getElementById("cartHtml"),
     btnPlus = document.getElementsByClassName("btnMinus"),
     btnMinus = document.getElementsByClassName("btnPlus"),
@@ -7,13 +7,13 @@ let cartHtml = document.getElementById("cartHtml"),
     form = document.getElementById("form"),
     formBtn = document.getElementById("formBtn");
 
-//Array de Productos
+//Array de Productos (Guarda el Fetch al cargar DOM)
 let products = [];
 
-//Array Carrito
+//Array Carrito (Está vacío o lo trae del localStorage)
 let cart = JSON.parse(localStorage.getItem("Cart")) || [];
 
-//Función Fetch
+//Función Fetch (Async)
 function fetchData() {
     fetch("https://brunorealan.github.io/computer_supply_store/json/products.json")
         .then((response) => response.json())
@@ -38,22 +38,43 @@ function showProducts(array) {
                         <button type="button" class="btn btn-outline-danger" onclick="addToCart(${product.id})">Agregar al Carrito</button>
                     </div>
                 </div>
-            </div>`,
-
-            document.getElementById("cards").innerHTML = products;
+            </div>`;
+        document.getElementById("cards").innerHTML = products;
     });
 }
 
+//Función para el buscador de productos
 function showBySearch() {
     let searchValue = form.value;
     const fuse = new Fuse(products, {
-        keys: ['name', 'type']
+        threshold: 0.3,
+        keys: ['name', 'type'],
     })
 
     const results = fuse.search(searchValue);
+    function showProduct(array) {
+        let products = "";
+        array.forEach((product) => {
+            products += `
+                <div class="col">
+                    <div class="card">
+                        <img src=${product.item.img} class="card-img-top p-4"
+                            alt=${product.item.name}>
+                        <div class="card-body text-center">
+                            <h3 class="card-name">${product.item.name}</h3>
+                            <h4 class="card-text">${product.item.description}</h4>
+                            <h3 class="card-text text-success">US$ ${product.item.price}</h3>
+                            <p class="card-text"><small class="text-muted">En Stock: ${product.item.stock}</small></p>
+                            <button type="button" class="btn btn-outline-danger" onclick="addToCart(${product.item.id})">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>`,
 
-    showProducts(results)
-    console.log("results", results);
+                document.getElementById("cards").innerHTML = products;
+        });
+    }
+    showProduct(results);
+    console.log(results);
 }
 
 //Funciones para organizar productos según categoría
@@ -79,8 +100,9 @@ function forMayorTo(array) {
 
 //Función que suma productos al carrito
 function addToCart(id) {
+    let idString = JSON.stringify(id);
     cartHtml.innerHTML = "";
-    if (cart.some((e) => e.id === id)) {
+    if (cart.some((e) => e.id === idString)) {
         changeNumberOfUnits("plus", id);
     } else {
         Swal.fire({
@@ -89,7 +111,7 @@ function addToCart(id) {
             showConfirmButton: false,
             timer: 1300
         });
-        const product = products.find((e) => e.id === id)
+        const product = products.find((e) => e.id === idString)
         console.log(product);
         cart.push({
             ...product,
@@ -113,7 +135,7 @@ function renderCart() {
     cartHtml.innerHTML = "";
     cart.forEach((product) =>
         cartHtml.innerHTML += `
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-4">
                     <img src=${product.img} class="img-fluid rounded-start p-2" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
@@ -149,18 +171,19 @@ function renderTotal() {
     canvasSubtitle.innerHTML = `
         <div class="all-p-cart">
             <p class="p-cart">Tienes (${totalProducts}) items en el carrito.</p>
-            <p class="p-cart">El total de la compra en dolares es: US$ ${totalPrice.toFixed(2)}</p>
-            <p class="p-cart">O en pesos uruguayos: $ ${Math.round(totalPricePesos)}</p>
+            <p class="p-cart">La compra en dolares es: <strong>US$ ${totalPrice.toFixed(2)}</strong></p>
+            <p class="p-cart">O en pesos uruguayos: <strong>UYU$ ${Math.round(totalPricePesos)}</strong></p>
         </div>
         <div class="cartBuyBtn">
-            <button onclick="buyCart(cart)" type="button">Comprar!</button>
+            <button class="btn btn-warning btn-sm" onclick="buyCart(cart)" type="button">Comprar !!</button>
         </div>
         `
 }
 
 //Funcíon que retira un producto del carrito
 function removeProductFromCart(id) {
-    cart = cart.filter((product) => product.id !== id)
+    let idString = JSON.stringify(id);
+    cart = cart.filter((product) => product.id !== idString)
     Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -175,18 +198,18 @@ function removeProductFromCart(id) {
 function changeNumberOfUnits(action, id) {
     cartHtml.innerHTML = "";
     cart = cart.map((product) => {
-        let numberOfUnits = product.numberOfUnits;
+        let idString = JSON.stringify(id);
+        let stockNumber = parseInt(product.stock);
 
-        if (product.id === id) {
-            if (action === "plus" && numberOfUnits < product.stock) {
-                numberOfUnits++;
-            } else if (action === "minus" && numberOfUnits > 1) {
-                numberOfUnits--;
+        if (product.id === idString) {
+            if (action === "plus" && product.numberOfUnits < stockNumber) {
+                product.numberOfUnits++;
+            } else if (action === "minus" && product.numberOfUnits > 1) {
+                product.numberOfUnits--;
             }
         }
         return {
             ...product,
-            numberOfUnits,
         };
     }),
         updateCart();
@@ -204,14 +227,7 @@ function buyCart(array) {
         })
     } else {
         let productsID = cart.map((product) => product.id);
-
         console.log(productsID);
-        /*         let search = products.includes(productsID)
-                if(search){
-                    console.log("te encontre elemento");
-                } */
-
-        //console.log(productsID);
         cart = [];
         swal.fire({
             icon: "success",
