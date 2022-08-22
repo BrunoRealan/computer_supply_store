@@ -106,8 +106,8 @@ function addToCart(id) {
         changeNumberOfUnits("plus", id);
     } else {
         Swal.fire({
-            icon: 'success',
-            title: 'El articulo se agregó al carrito',
+            title: "El articulo se agregó al carrito",
+            icon: "success",
             showConfirmButton: false,
             timer: 1300
         });
@@ -146,9 +146,9 @@ function renderCart() {
                         <p class="card-text"><small class="text">En Stock: ${product.stock}</small></p>
                         <p class="card-text"><small class="text">US$ ${product.price}</small></p>
                         <div class="units">
-                            <button type="button" class="btnMinus btn btn-warning btn-sm" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
+                            <button type="button" class="btnMinus btn-warning btn-sm" onclick="changeNumberOfUnits('minus',${product.id})">-</button>
                             <div class="number unitsNumber">${product.numberOfUnits}</div>
-                            <button type="button" class="btnPlus btn btn-warning btn-sm" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
+                            <button type="button" class="btnPlus btn-warning btn-sm" onclick="changeNumberOfUnits('plus',${product.id})">+</button>          
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@ function renderCart() {
     `)
 }
 
-//Función que calcula total en carrito (btn de compra no funciona aún)
+//Función que calcula total en carrito
 function renderTotal() {
     let totalPrice = 0;
     let totalPricePesos = 0;
@@ -175,7 +175,7 @@ function renderTotal() {
             <p class="p-cart">O en pesos uruguayos: <strong>UYU$ ${Math.round(totalPricePesos)}</strong></p>
         </div>
         <div class="cartBuyBtn">
-            <button class="btn btn-warning btn-sm" onclick="buyCart(cart)" type="button">Comprar !!</button>
+            <button class="btn btn-warning btn-sm" onclick="buyCart(cart)" type="button">Comprar</button>
         </div>
         `
 }
@@ -183,15 +183,28 @@ function renderTotal() {
 //Funcíon que retira un producto del carrito
 function removeProductFromCart(id) {
     let idString = JSON.stringify(id);
-    cart = cart.filter((product) => product.id !== idString)
     Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'El articulo se borró del carrito',
-        showConfirmButton: false,
-        timer: 1500
+        title: "¿Está seguro/a?",
+        text: "¿Quiere eliminar el producto del carrito?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e53446",
+        cancelButtonColor: "#018657",
+        confirmButtonText: "Quitar producto",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            cart = cart.filter((product) => product.id !== idString)
+            Swal.fire({
+                title: "¡Eliminado!",
+                text: "El artículo se borró del carrito",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            updateCart();
+        }
     })
-    updateCart()
 }
 
 //Funcion cambio de numero de unidades en el carrito 
@@ -215,7 +228,7 @@ function changeNumberOfUnits(action, id) {
         updateCart();
 }
 
-//Función del Boton Comprar (necesito retirar si coincide id, numberOfUnits del mismo objeto del array "products"
+//Función del Boton Comprar del carrito
 function buyCart(array) {
     if (array.length === 0) {
         swal.fire({
@@ -226,14 +239,14 @@ function buyCart(array) {
             timer: 1500
         })
     } else {
-        let productsID = cart.map((product) => product.id);
-        console.log(productsID);
         cart = [];
         swal.fire({
             icon: "success",
             title: "La compra fue un éxito",
             text: "Puedes seguir comprando si lo deseas!",
-        })
+            confirmButtonColor: "#018657",
+            timer: 2500
+        });
         updateCart();
     }
 }
