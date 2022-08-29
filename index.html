@@ -21,9 +21,9 @@
     <!-- Header -->
     <header>
         <nav class="navbar flex-nowrap border-bottom border-3">
-            <div>
+            <a href="index.html">
                 <img class="logo" src="resources/CS-logo.png" alt="The Computer logo">
-            </div>
+            </a>
             <div class="header container-fluid justify-content-evenly">
                 <div class="divTitle">
                     <h1 class="title navbar-brand">Computer Hardware Supplies</h1>
@@ -41,11 +41,11 @@
     <main>
         <!-- Btns de clasificación por categoría -->
         <div class="cassificatorBtn d-flex justify-content-end m-2 gap-1">
-            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="forAToZ"> A to Z</button>
-            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="forZToA"> Z to A</button>
-            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="forMinusTo"> Menor a Mayor
+            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="sortAToZ"> A to Z</button>
+            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="sortZToA"> Z to A</button>
+            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="sortMinusTo"> Menor a Mayor
                 precio</button>
-            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="forMayorTo"> Mayor a Menor
+            <button class="btn btn-warning btn-sm cassificatorBtn-btn m-1" id="sortMayorTo"> Mayor a Menor
                 precio</button>
         </div>
         <!-- Productos renderizados -->
@@ -55,9 +55,7 @@
         </div>
         <!--Btn OffCanvas -->
         <button class="btn btn-success cart-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
-            aria-controls="offcanvas">
-            Ir al carrito de compras
-        </button>
+            aria-controls="offcanvas">Ir al carrito de compras</button>
         <!-- Carrito Offcanvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <div class="offcanvas-header">
@@ -74,9 +72,9 @@
     </main>
     <!-- Footer -->
     <footer class="container-fluid flex-column">
-        <div>
+        <a href="index.html">
             <img class="logoFooter" src="resources/CS-logo.png" alt="The Computer logo">
-        </div>
+        </a>
         <div class="footer__redes row">
             <a href="https://www.facebook.com/" class="col fab fa-facebook"></a>
             <a href="https://www.instagram.com/" class="col fab fa-instagram"></a>

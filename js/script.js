@@ -1,4 +1,4 @@
-//Variables de elementos del DOM
+//Variables con elementos del DOM
 let cartHtml = document.getElementById("cartHtml"),
     btnPlus = document.getElementsByClassName("btnMinus"),
     btnMinus = document.getElementsByClassName("btnPlus"),
@@ -10,7 +10,7 @@ let cartHtml = document.getElementById("cartHtml"),
 //Array de Productos (Guarda el Fetch al cargar DOM)
 let products = [];
 
-//Array Carrito (Está vacío o lo trae del localStorage)
+//Array Carrito (Está vacío o lo trae del LocalStorage)
 let cart = JSON.parse(localStorage.getItem("Cart")) || [];
 
 //Función Fetch (Async)
@@ -43,7 +43,7 @@ function showProducts(array) {
     });
 }
 
-//Función para el buscador de productos
+//Función para el buscador de productos (Fuse.js)
 function showBySearch() {
     let searchValue = form.value;
     const fuse = new Fuse(products, {
@@ -74,26 +74,25 @@ function showBySearch() {
         });
     }
     showProduct(results);
-    console.log(results);
 }
 
 //Funciones para organizar productos según categoría
-function forAToZ(array) {
+function sortAToZ(array) {
     products = array.sort((a, b) => a.name.localeCompare(b.name));
     showProducts(products);
 }
 
-function forZToA(array) {
+function sortZToA(array) {
     products = array.sort((a, b) => b.name.localeCompare(a.name));
     showProducts(products);
 }
 
-function forMinusTo(array) {
+function sortMinusTo(array) {
     products = array.sort((a, b) => a.price - b.price);
     showProducts(products);
 }
 
-function forMayorTo(array) {
+function sortMayorTo(array) {
     products = array.sort((a, b) => b.price - a.price);
     showProducts(products);
 }
@@ -111,8 +110,7 @@ function addToCart(id) {
             showConfirmButton: false,
             timer: 1300
         });
-        const product = products.find((e) => e.id === idString)
-        console.log(product);
+        const product = products.find((e) => e.id === idString);
         cart.push({
             ...product,
             numberOfUnits: 1,
@@ -138,7 +136,7 @@ function renderCart() {
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-4">
-                    <img src=${product.img} class="img-fluid rounded-start p-2" onclick="removeProductFromCart(${product.id})" alt=${product.name}>
+                    <img src=${product.img} class="img-fluid rounded-start p-2" onclick="removeProduct(${product.id})" alt=${product.name}>
                 </div>
                 <div class="col-8">
                     <div class="card-body">
@@ -154,10 +152,10 @@ function renderCart() {
                 </div>
             </div>
         </div>
-    `)
+    `);
 }
 
-//Función que calcula total en carrito
+//Función que calcula y renderiza total en el carrito
 function renderTotal() {
     let totalPrice = 0;
     let totalPricePesos = 0;
@@ -177,11 +175,11 @@ function renderTotal() {
         <div class="cartBuyBtn">
             <button class="btn btn-warning btn-sm" onclick="buyCart(cart)" type="button">Comprar</button>
         </div>
-        `
+        `;
 }
 
 //Funcíon que retira un producto del carrito
-function removeProductFromCart(id) {
+function removeProduct(id) {
     let idString = JSON.stringify(id);
     Swal.fire({
         title: "¿Está seguro/a?",
@@ -204,10 +202,10 @@ function removeProductFromCart(id) {
             });
             updateCart();
         }
-    })
+    });
 }
 
-//Funcion cambio de numero de unidades en el carrito 
+//Funcion que cambia el numero de unidades de un producto del carrito 
 function changeNumberOfUnits(action, id) {
     cartHtml.innerHTML = "";
     cart = cart.map((product) => {
@@ -237,13 +235,13 @@ function buyCart(array) {
             text: "No tienes productos en el carrito",
             showConfirmButton: false,
             timer: 1500
-        })
+        });
     } else {
         cart = [];
         swal.fire({
             icon: "success",
             title: "La compra fue un éxito",
-            text: "Puedes seguir comprando si lo deseas!",
+            text: "¡Puedes seguir comprando si lo deseas!",
             confirmButtonColor: "#018657",
             timer: 2500
         });
@@ -255,7 +253,7 @@ function buyCart(array) {
 window.addEventListener("DOMContentLoaded", fetchData());
 window.addEventListener("DOMContentLoaded", updateCart());
 formBtn.addEventListener("click", () => showBySearch());
-document.getElementById("forAToZ").addEventListener("click", () => forAToZ(products));
-document.getElementById("forZToA").addEventListener("click", () => forZToA(products));
-document.getElementById("forMinusTo").addEventListener("click", () => forMinusTo(products));
-document.getElementById("forMayorTo").addEventListener("click", () => forMayorTo(products));
+document.getElementById("sortAToZ").addEventListener("click", () => sortAToZ(products));
+document.getElementById("sortZToA").addEventListener("click", () => sortZToA(products));
+document.getElementById("sortMinusTo").addEventListener("click", () => sortMinusTo(products));
+document.getElementById("sortMayorTo").addEventListener("click", () => sortMayorTo(products));
